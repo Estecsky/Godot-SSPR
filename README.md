@@ -3,6 +3,7 @@
 
 ![img](./ScreenShot.png)
 
+实现思路感兴趣可查阅知乎文章：[Godot 4 实现屏幕空间平面反射(SSPR)|知乎](https://zhuanlan.zhihu.com/p/1986834836032348814)
 ## 介绍
 项目初衷是为了在Godot中实现可在Forward+和Mobile渲染器上低成本运行的屏幕空间平面反射效果。  
 
