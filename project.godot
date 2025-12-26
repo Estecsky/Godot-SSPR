@@ -14,10 +14,6 @@ config/name="Godot_SSPR"
 run/main_scene="uid://dh1m0i50h235r"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
-[debug]
-
-settings/stdout/print_gpu_profile=true
-
 [display]
 
 window/vsync/vsync_mode=0
