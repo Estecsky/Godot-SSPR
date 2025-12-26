@@ -1,0 +1,92 @@
+[gd_scene load_steps=16 format=3 uid="uid://b3mno48jh33w1"]
+
+[ext_resource type="Texture2D" uid="uid://dw074k5q756s8" path="res://World/studio_small_07_4k.exr" id="1_s71gb"]
+[ext_resource type="Script" uid="uid://c0ike0le8dkin" path="res://Script/ReconstructViewPos.gd" id="2_ym8qs"]
+[ext_resource type="Shader" uid="uid://beuqduk38ux66" path="res://shader/ReconstructViewPos/Reconstruct.gdshader" id="3_4uiqu"]
+[ext_resource type="Script" uid="uid://dxchqg37op60g" path="res://Script/FreeCam.gd" id="3_uop06"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ym8qs"]
+panorama = ExtResource("1_s71gb")
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_4uiqu"]
+sky_material = SubResource("PanoramaSkyMaterial_ym8qs")
+
+[sub_resource type="Environment" id="Environment_uop06"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_4uiqu")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jd4l8"]
+albedo_color = Color(0.9160309, 0.76276624, 0.7052097, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ym8qs"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qlmij"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_44h2x"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_y3115"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pdbxw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4uiqu"]
+render_priority = 0
+shader = ExtResource("3_4uiqu")
+shader_parameter/camera_pos = Vector3(-1.9604989, 2.4595737, 6.6219664)
+shader_parameter/top_left = Vector3(0, 0, 0)
+shader_parameter/x_extent = Vector3(0, 0, 0)
+shader_parameter/y_extent = Vector3(0, 0, 0)
+shader_parameter/z_near_inv = 20.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_cukq3"]
+size = Vector2(2.17, 1.665)
+
+[node name="ReconstructViewPos" type="Node3D" node_paths=PackedStringArray("cam", "post_effect")]
+script = ExtResource("2_ym8qs")
+cam = NodePath("Camera3D")
+post_effect = NodePath("post_effect")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uop06")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.98942477, -0.12561443, 0.072523475, 2.780595e-08, 0.49999994, 0.86602545, -0.14504698, -0.856867, 0.4947123, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9434991, 0.16517617, -0.2872739, 0, 0.8669146, 0.49845678, 0.33137512, -0.47029352, 0.8179331, -1.9604989, 2.4595737, 6.6219664)
+script = ExtResource("3_uop06")
+
+[node name="floor" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_jd4l8")
+mesh = SubResource("PlaneMesh_ym8qs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4124751, 0)
+mesh = SubResource("BoxMesh_qlmij")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.031405225, 0.42111656, -0.90646267, 0.99723077, 0.074369565, 0, 0.06741323, -0.9039525, -0.42228597, -1.9322351, 0.23492515, 0)
+mesh = SubResource("CapsuleMesh_44h2x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6362533, 0, -0.77148026, 0, 1, 0, 0.77148026, 0, 0.6362533, 0, 0.34880316, -2.0621676)
+mesh = SubResource("PrismMesh_y3115")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8928593, 0.40836406, 1.6545286)
+mesh = SubResource("SphereMesh_pdbxw")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4195408, 0.40836406, 0.03404975)
+mesh = SubResource("SphereMesh_pdbxw")
+
+[node name="post_effect" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.96769917, 0.12851499, -0.21689244, 0, 0.8603156, 0.50976175, 0.25210798, -0.493296, 0.8325267, -1.6070907, 1.8210064, 3.8126717)
+material_override = SubResource("ShaderMaterial_4uiqu")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_cukq3")

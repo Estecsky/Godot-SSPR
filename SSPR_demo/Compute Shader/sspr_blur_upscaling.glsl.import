@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://cbvid0d7bvuak"
+path="res://.godot/imported/sspr_blur_upscaling.glsl-826ca5b2879aa3b51e67ae3f1811acfe.res"
+
+[deps]
+
+source_file="res://SSPR_demo/Compute Shader/sspr_blur_upscaling.glsl"
+dest_files=["res://.godot/imported/sspr_blur_upscaling.glsl-826ca5b2879aa3b51e67ae3f1811acfe.res"]
+
+[params]
+

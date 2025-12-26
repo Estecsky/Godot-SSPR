@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://clo1vg4xrbofi"
+path="res://.godot/imported/texture_copy.glsl-b23965c63015c35b06a0b3bc3983dbe0.res"
+
+[deps]
+
+source_file="res://SSPR_demo/Compute Shader/texture_copy.glsl"
+dest_files=["res://.godot/imported/texture_copy.glsl-b23965c63015c35b06a0b3bc3983dbe0.res"]
+
+[params]
+

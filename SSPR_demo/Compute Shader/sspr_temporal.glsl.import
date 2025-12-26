@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://b04fv008gcbnn"
+path="res://.godot/imported/sspr_temporal.glsl-b1af8319993657c719b8c308c31d291a.res"
+
+[deps]
+
+source_file="res://SSPR_demo/Compute Shader/sspr_temporal.glsl"
+dest_files=["res://.godot/imported/sspr_temporal.glsl-b1af8319993657c719b8c308c31d291a.res"]
+
+[params]
+

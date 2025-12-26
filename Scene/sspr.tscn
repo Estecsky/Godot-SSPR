@@ -1,0 +1,193 @@
+[gd_scene load_steps=30 format=3 uid="uid://dh1m0i50h235r"]
+
+[ext_resource type="Script" uid="uid://csv53ugaeh8kl" path="res://SSPR_demo/GDScript/SSPR_Manager.gd" id="1_w0gv0"]
+[ext_resource type="Script" uid="uid://c7gevvem1la1w" path="res://Script/ref_scene.gd" id="1_y566p"]
+[ext_resource type="Texture2D" uid="uid://bejcviteig5s2" path="res://World/studio_small_01_4k.exr" id="2_4bjef"]
+[ext_resource type="Shader" uid="uid://bqlwse0wmxn1l" path="res://SSPR_demo/shader/ref_sspr.gdshader" id="2_88t17"]
+[ext_resource type="Texture2D" uid="uid://btwyjik1cvcrl" path="res://Scene/cell_noise.tres" id="3_w0gv0"]
+[ext_resource type="Texture2D" uid="uid://ctwqyeivxuwpa" path="res://Scene/cell_noise2.tres" id="4_rt0n0"]
+[ext_resource type="Material" uid="uid://bfl0gic7ft7bj" path="res://Material/floor.tres" id="4_xjqfs"]
+[ext_resource type="Script" uid="uid://dxchqg37op60g" path="res://Script/FreeCam.gd" id="5_34jrp"]
+[ext_resource type="Script" uid="uid://cwep6utpad5ir" path="res://Scene/node.gd" id="9_4bjef"]
+[ext_resource type="ArrayMesh" uid="uid://6427vcmx5tui" path="res://Mesh/bunny_10k.res" id="10_y566p"]
+[ext_resource type="ArrayMesh" uid="uid://bgbva1uo1mcqn" path="res://Mesh/suzanne.res" id="11_4bjef"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_rkeoh"]
+panorama = ExtResource("2_4bjef")
+
+[sub_resource type="Sky" id="Sky_478lq"]
+sky_material = SubResource("PanoramaSkyMaterial_rkeoh")
+process_mode = 2
+
+[sub_resource type="Environment" id="Environment_1w6ai"]
+background_mode = 2
+background_energy_multiplier = 0.07
+sky = SubResource("Sky_478lq")
+ambient_light_source = 3
+ambient_light_energy = 1.47
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 1.76
+ssr_max_steps = 392
+ssr_fade_in = 0.12183806
+ssr_fade_out = 7.9999895
+sdfgi_cascades = 5
+glow_enabled = true
+glow_intensity = 1.43
+glow_mix = 0.072
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_4bjef"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 3
+access_resolved_color = true
+access_resolved_depth = true
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_w0gv0")
+neighbor_clamp_radius = 3
+jitter_scale = 0.905
+blur_enable = false
+metadata/_custom_type_script = "uid://csv53ugaeh8kl"
+
+[sub_resource type="Compositor" id="Compositor_lg18a"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_4bjef")])
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rkeoh"]
+size = Vector2(50, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0buaq"]
+render_priority = 0
+shader = ExtResource("2_88t17")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_w0gv0")
+shader_parameter/roughness = 0.7090000336775
+shader_parameter/specular = 0.6499999854712
+shader_parameter/metallic = 0.0
+shader_parameter/step_params = 0.6890000327275
+shader_parameter/texture_normal = ExtResource("4_rt0n0")
+shader_parameter/normal_scale = 0.0
+shader_parameter/env_map = ExtResource("2_4bjef")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pyfq3"]
+size = Vector2(50, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4bjef"]
+albedo_color = Color(0.007843138, 0.8745098, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1w6ai"]
+albedo_color = Color(1, 0.6398676, 0.35792574, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n8lva"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lg18a"]
+albedo_color = Color(1, 0.48235294, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkeoh"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8vk5p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y566p"]
+albedo_color = Color(0, 0.80581087, 0.6650027, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lg18a"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjqfs"]
+albedo_color = Color(0, 0.5384072, 0.5950413, 1)
+roughness = 0.26
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34jrp"]
+albedo_color = Color(0, 0.15203322, 0.62219584, 1)
+roughness = 0.2
+
+[node name="SSPR" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("1_y566p")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_1w6ai")
+compositor = SubResource("Compositor_lg18a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(0.72374105, -0.3136601, 0.61466765, 0.2801814, 0.94757247, 0.15363893, -0.63063246, 0.061023653, 0.7736788, 2.162581, 5.6769576, -7.148363)
+light_energy = 0.77
+shadow_enabled = true
+
+[node name="ref_floor_SSR" type="MeshInstance3D" parent="Node3D"]
+visible = false
+material_override = ExtResource("4_xjqfs")
+mesh = SubResource("PlaneMesh_rkeoh")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(0.99970055, 0.002601378, 0.024332866, 0, 0.99433386, -0.10630223, -0.024471525, 0.1062704, 0.9940361, 8.385868, 0.19014055, 8.056959)
+fov = 46.9
+script = ExtResource("5_34jrp")
+zoom_sensitivity = 3.0
+zoom_speed = 4.802
+
+[node name="FPS" type="Label" parent="Node3D"]
+visible = false
+offset_left = 180.0
+offset_top = 90.0
+offset_right = 427.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 46
+
+[node name="ref_floor_SSPR" type="MeshInstance3D" parent="Node3D"]
+material_override = SubResource("ShaderMaterial_0buaq")
+mesh = SubResource("PlaneMesh_pyfq3")
+metadata/_edit_lock_ = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2832408, 5.2529435, -2.7389808)
+light_energy = 3.127
+omni_range = 16.738617
+
+[node name="Node" type="Node3D" parent="."]
+script = ExtResource("9_4bjef")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5516663, 1.7587891, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_4bjef")
+size = Vector3(19.818298, 4.517578, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.520499, 0.10332, 4.342777)
+material_override = SubResource("StandardMaterial3D_1w6ai")
+mesh = SubResource("BoxMesh_n8lva")
+skeleton = NodePath("../../Node3D")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 6.588134, 0.216393, 5.015615)
+material_override = SubResource("StandardMaterial3D_lg18a")
+mesh = SubResource("BoxMesh_n8lva")
+skeleton = NodePath("../../Node3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.023894, 0.5038878, 3.5196075)
+material_override = SubResource("StandardMaterial3D_rkeoh")
+mesh = SubResource("CapsuleMesh_8vk5p")
+skeleton = NodePath("../../Node3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8424554, 0.061572194, 3.0801334)
+material_override = SubResource("StandardMaterial3D_y566p")
+mesh = SubResource("SphereMesh_lg18a")
+skeleton = NodePath("../../Node3D")
+
+[node name="bunny" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(6.46, 0, 0, 0, 6.46, 0, 0, 0, 6.46, 7.931034, -0.040080488, 5.7010145)
+material_override = SubResource("StandardMaterial3D_xjqfs")
+mesh = ExtResource("10_y566p")
+
+[node name="suzanne" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(0.5030073, -0.1528753, 0.28915852, -0.008595363, 0.5240696, 0.29202265, -0.3269703, -0.2489583, 0.43716142, 6.0522356, 0.23416126, 6.096347)
+visible = false
+material_override = SubResource("StandardMaterial3D_34jrp")
+mesh = ExtResource("11_4bjef")

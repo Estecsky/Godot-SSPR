@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bbaf88qnvohm6"
+path="res://.godot/imported/sspr_resolve.glsl-8966a71b90d38a5f4359a7019b2f4f68.res"
+
+[deps]
+
+source_file="res://SSPR_demo/Compute Shader/sspr_resolve.glsl"
+dest_files=["res://.godot/imported/sspr_resolve.glsl-8966a71b90d38a5f4359a7019b2f4f68.res"]
+
+[params]
+
